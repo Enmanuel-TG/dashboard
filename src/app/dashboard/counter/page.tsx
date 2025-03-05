@@ -1,5 +1,7 @@
-export const page = () => {
+const page = () => {
   return (
-    <h1>page counter</h1>
+    <h1>Holaaa</h1>
   )
 }
+
+export default page
