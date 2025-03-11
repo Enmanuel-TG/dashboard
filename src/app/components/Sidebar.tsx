@@ -1,22 +1,29 @@
 import Image from "next/image";
-import { IoLogoReact, IoBrowsersOutline, IoCalculator } from "react-icons/io5";
+import { IoLogoReact, IoBrowsersOutline, IoCalculator, IoFootball } from "react-icons/io5";
 import { SidebarMenuItem } from "./SidebarMenuItem";
+
+
 
 const sidebarMenu = [
   {
     title: "Dashboard",
     subTitle: "Dashboard Manager",
     icon: <IoBrowsersOutline className="mr-2" size={20} />,
-    path: "/dashboard",
+    path: "/dashboard/main",
   },
   {
-    title: "Database",
-    subTitle: "Database Manager",
+    title: "counter",
+    subTitle: "Counter Manager",
     icon: <IoCalculator className="mr-2" size={20} />,
-    path: "/database",
+    path: "/dashboard/counter",
   },
+  {
+    title: "pokemons",
+    subTitle: "Statics Generations",
+    icon: <IoFootball className="mr-2" size={20} />,
+    path: "/dashboard/pokemons",
+  }
 ];
-
 
 export const Sidebar = () => {
   return (
@@ -25,10 +32,10 @@ export const Sidebar = () => {
       className="bg-gray-900 min-h-screen z-10 text-slate-300 w-[400px] left-0 h-screen overflow-y-scroll"
     >
       <div id="logo" className=" my-4 px-6">
-              <h1 className=" flex items-center text-lg md:text-2xl font-bold text-white">
-        <IoLogoReact size={25} className="mr-2" />
-        <span>Dash</span>
-          <span className="text-blue-500"> 8</span>.
+        <h1 className=" flex items-center text-lg md:text-2xl font-bold text-white">
+          <IoLogoReact size={25} className="mr-2" />
+          <span>Dash</span>
+          <span className="text-blue-500 ml-2"> 8</span>.
         </h1>
         <p className="text-slate-500 text-sm">
           Manage your actions and activities
@@ -55,7 +62,6 @@ export const Sidebar = () => {
         {sidebarMenu.map((item, index) => (
           <SidebarMenuItem key={index} {...item} />
         ))}
-
       </div>
     </div>
   );

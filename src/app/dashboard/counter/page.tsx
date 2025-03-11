@@ -1,7 +1,15 @@
-const page = () => {
-  return (
-    <h1>Holaaa</h1>
-  )
-}
+import { CartCounter } from "@/app/shopping-cart";
 
-export default page
+export const metadata = {
+ title: 'Shopping ',
+description: 'Counter'
+};
+
+
+const Page = () => {
+  return <div>
+    <CartCounter />
+  </div>;
+};
+
+export default Page;

@@ -1,4 +1,10 @@
+'use client'
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { JSX } from "react";
+
+
 
 interface SidebarMenuItemProps {
   title: string;
@@ -8,14 +14,16 @@ interface SidebarMenuItemProps {
 }
 
 export const SidebarMenuItem = ({ title, subTitle, icon, path }: SidebarMenuItemProps) => {
+  const namePath = usePathname();
+
   return (
-    <a
-      href="#"
-      className="w-full px-2 flex space-x-2 items-center border-b border-slate-700 py-3 hover:bg-blue-800 transition duration-150"
-    >
+    <Link
+      href={path}
+      className={`w-full px-2 flex space-x-2 items-center border-b py-3 hover:bg-blue-800 transition duration-150 ${
+        namePath === path ? "bg-blue-800" : "border-slate-700"
+      }`}    >
       <div>
         {icon}
-          <path strokeLinecap="round" strokeLinejoin="round" d={path} />
       </div>
       <div className="flex flex-col">
         <span className="text-lg font-bold leading-5 text-white">{title}</span>
@@ -23,7 +31,7 @@ export const SidebarMenuItem = ({ title, subTitle, icon, path }: SidebarMenuItem
           {subTitle}
         </span>
       </div>
-    </a>
+    </Link>
   );
 };
 
