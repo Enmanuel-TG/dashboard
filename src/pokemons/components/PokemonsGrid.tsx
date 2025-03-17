@@ -1,4 +1,4 @@
-import { SimplePokemon } from "@/pokemons";
+import { SimplePokemon } from "@/pokemons/interface";
 import { PokemonCard } from "./PokemonCard";
 
 interface PokemonsCardProps {
