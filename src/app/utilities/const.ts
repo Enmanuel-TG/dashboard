@@ -1,0 +1,1 @@
+export const maxPokemons: number = 151;

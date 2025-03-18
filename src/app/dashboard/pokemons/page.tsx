@@ -1,7 +1,8 @@
 import { pokemonResponse, SimplePokemon } from "@/pokemons/interface";
 import { PokemonsGrid } from "../../../pokemons/components/PokemonsGrid";
+import { maxPokemons } from "@/app/utilities";
 
-export const getPokemons = async (
+const getPokemons = async (
   limit: number,
   offset: number
 ): Promise<SimplePokemon[]> => {
@@ -17,8 +18,7 @@ export const getPokemons = async (
 };
 
 const Page = async () => {
-  const pokemons = await getPokemons(121, 0);
-  //throw new Error("This is an error");
+  const pokemons = await getPokemons(maxPokemons, 0);
   return (
     <div className=" flex flex-col ">
       <span className="text-5xl my-2">

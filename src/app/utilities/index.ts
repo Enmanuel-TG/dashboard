@@ -1,0 +1,1 @@
+export { maxPokemons } from './const';

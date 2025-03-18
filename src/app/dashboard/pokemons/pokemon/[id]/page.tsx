@@ -1,36 +1,39 @@
+import { maxPokemons } from "@/app/utilities";
 import { Pokemon } from "@/pokemons/interface";
 import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-interface Props {
-  params: {
-    id: string;
-  };
-}
+
+export const generateStaticParams = async () => {
+  return Array.from({ length: maxPokemons }, (_, index) => ({
+    id: (index + 1).toString(),
+  }));
+};
 
 export const generateMetadata = async ({
   params,
-}: Props): Promise<Metadata> => {
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> => {
   try {
-    const { id, name } = await getPokemon(params.id);
-
+    const { id } = await params;
+    const { name } = await getPokemon(parseInt(id));
     return {
-      title: `#${id} - ${name}`,
+      title: `${name}`,
       description: `Pokemon page ${name}`,
     };
-  } catch (error) {
+  } catch {
     return {
       title: "Pokemon page",
-      description: `pokemon page not found ${error}`,
+      description: `Pokemon page not found`,
     };
   }
 };
 
-const getPokemon = async (id: string): Promise<Pokemon> => {
-
+const getPokemon = async (id: number): Promise<Pokemon> => {
   try {
     const pokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`, {
-      cache: "force-cache",
+      //cache: "force-cache",
     }).then((resp) => resp.json());
     return pokemon;
   } catch {
@@ -38,8 +41,9 @@ const getPokemon = async (id: string): Promise<Pokemon> => {
   }
 };
 
-export const Page = async ({ params }: Props) => {
-  const pokemon = await getPokemon(params.id);
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } = await params;
+  const pokemon = await getPokemon(parseInt(id));
   return (
     <div className="flex mt-5 flex-col items-center text-slate-800">
       <div className="relative flex flex-col items-center rounded-[20px] w-[700px] mx-auto bg-white bg-clip-border  shadow-lg  p-3">
@@ -49,6 +53,7 @@ export const Page = async ({ params }: Props) => {
           </h1>
           <div className="flex flex-col justify-center items-center">
             <Image
+              style={{ width: "auto", height: "auto" }}
               src={pokemon.sprites.other?.dream_world.front_default ?? ""}
               width={150}
               height={150}
