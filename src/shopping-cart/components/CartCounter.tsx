@@ -1,10 +1,35 @@
 'use client';
-import { useAppSelector, useAppDispatch } from "@/store";
-import { addOne, subtractOne } from "@/store/counter/counterSlice";
 
-export const CartCounter = () => {
+import { useAppSelector, useAppDispatch } from "@/store";
+import { addOne, initialCounterState, subtractOne } from "@/store/counter/counterSlice";
+import { useEffect } from "react";
+
+
+interface Props {
+  value?: number;
+}
+
+interface CounterResponse {
+  count: number,
+  method: string
+}
+
+const getApiCounter = async (): Promise<CounterResponse> => {
+  const res = await fetch('/api/counter').then((res) => res.json());
+  return res;
+}
+
+export const CartCounter = ({}:Props) => {
   const count = useAppSelector((state) => state.counter.count);
   const dispatch = useAppDispatch();
+
+  // useEffect(() => {
+  //   dispatch(initialCounterState(value));
+  // }, [dispatch, value]);
+
+  useEffect(() => {
+    getApiCounter().then(({count}) => dispatch(initialCounterState( count)));
+  }, [dispatch]);
 
   return (
     <div className="flex flex-col items-center w-full justify-center h-full">

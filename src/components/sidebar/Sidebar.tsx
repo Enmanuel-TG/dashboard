@@ -27,7 +27,7 @@ const sidebarMenu = [
     title: "favorites",
     subTitle: "Global Favorites",
     icon: <IoHeartOutline className="mr-2" size={20} />,
-    path: "/dashboard/pokemons",
+    path: "/dashboard/favorites",
   },
 ];
 
