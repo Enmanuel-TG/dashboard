@@ -1,4 +1,5 @@
-import { PokemonsGrid } from "@/pokemons/components/PokemonsGrid";
+import { FavoritePokemons } from "@/pokemons";
+
 
 export const metadata = {
  title: 'Favorites',
@@ -8,8 +9,11 @@ export const metadata = {
 const page = () => {
   return (
     <div>
-      <PokemonsGrid pokemons={[]}/>
+      <div className="flex items-center">
+        <span className="text-4xl">Favorite pokemons</span><h1 className="ml-2 text-blue-600">GLobal state</h1></div>
+      <FavoritePokemons/>
     </div>
   )
 }
 export default page;
+

@@ -1,4 +1,5 @@
-import { pokemonResponse, SimplePokemon } from "@/pokemons/interface";
+
+import { pokemonResponse, SimplePokemon } from "@/pokemons";
 import { PokemonsGrid } from "../../../pokemons/components/PokemonsGrid";
 import { maxPokemons } from "@/app/utilities";
 
@@ -20,7 +21,7 @@ const getPokemons = async (
 const Page = async () => {
   const pokemons = await getPokemons(maxPokemons, 0);
   return (
-    <div className=" flex flex-col ">
+    <div className="flex flex-col ">
       <span className="text-5xl my-2">
         Pokemons list <small>Static</small>
       </span>
